@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  bio: MyText
+  species: MyString
+  breed: MyString
+  gwcats: false
+  gwkids: false
+  gwdogs: false
+  location: one
+
+two:
+  name: MyString
+  bio: MyText
+  species: MyString
+  breed: MyString
+  gwcats: false
+  gwkids: false
+  gwdogs: false
+  location: two
