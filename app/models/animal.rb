@@ -1,7 +1,7 @@
 class Animal < ApplicationRecord
   belongs_to :location
-  # belongs_to :user, optional:true
-  has_many :users, through: :favorites
+
+  # belongs_to :owner, optional:true, class_name: "User"
 
   # def favorites
   #   Favorite.all.select{|n|n.animal_id == self.id}
@@ -21,4 +21,7 @@ class Animal < ApplicationRecord
   #     end
   # end
 
+
+  has_many :favorites 
+  has_many :users, through: :favorites
 end
