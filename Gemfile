@@ -44,3 +44,5 @@ gem "pry", "~> 0.13.0"
 
 gem "nokogiri", "~> 1.10"
 gem "rest-client", "~> 2.1"
+
+gem "json", "~> 2.3"

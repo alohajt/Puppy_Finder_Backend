@@ -1,86 +1,75 @@
 
-require 'pry' # # This file is auto-generated from the current state of the database. Instead
-# # of editing this file, please use the migrations feature of Active Record to
-# # incrementally modify your database, and then regenerate this schema definition.
-# #
-# # This file is the source Rails uses to define your schema when running `rails
-# # db:schema:load`. When creating a new database, `rails db:schema:load` tends to
-# # be faster and is potentially less error prone than running all of your
-# # migrations from scratch. Old migrations may fail to apply correctly if those
-# # migrations use external dependencies or application code.
-# #
-# # It's strongly recommended that you check this file into your version control system.
+require 'pp'
+require 'rest_client'
+require 'json'
+require 'byebug'
+require 'pry' 
 
-# ActiveRecord::Schema.define(version: 2020_03_24_190400) do
 
-#   create_table "animals", force: :cascade do |t|
-#     t.string "name"
-#     t.text "bio"
-#     t.string "species"
-#     t.string "breed"
-#     t.boolean "gwcats"
-#     t.boolean "gwkids"
-#     t.boolean "gwdogs"
-#     t.integer "location_id", null: false
-#     t.datetime "created_at", precision: 6, null: false
-#     t.datetime "updated_at", precision: 6, null: false
-#     t.index ["location_id"], name: "index_animals_on_location_id"
-#   end
-
-#   create_table "favorites", force: :cascade do |t|
-#     t.integer "animal_id", null: false
-#     t.integer "user_id", null: false
-#     t.datetime "created_at", precision: 6, null: false
-#     t.datetime "updated_at", precision: 6, null: false
-#     t.index ["animal_id"], name: "index_favorites_on_animal_id"
-#     t.index ["user_id"], name: "index_favorites_on_user_id"
-#   end
-
-#   create_table "locations", force: :cascade do |t|
-#     t.string "city"
-#     t.datetime "created_at", precision: 6, null: false
-#     t.datetime "updated_at", precision: 6, null: false
-#   end
-
-#   create_table "users", force: :cascade do |t|
-#     t.string "username"
-#     t.string "password"
-#     t.integer "location_id", null: false
-#     t.datetime "created_at", precision: 6, null: false
-#     t.datetime "updated_at", precision: 6, null: false
-#     t.index ["location_id"], name: "index_users_on_location_id"
-#   end
-
-#   add_foreign_key "animals", "locations"
-#   add_foreign_key "favorites", "animals"
-#   add_foreign_key "favorites", "users"
-#   add_foreign_key "users", "locations"
-# end
-# # 
-
+#WIPE ALL DATA
 Favorite.destroy_all
 User.destroy_all
 Animal.destroy_all
 Location.destroy_all
 
+#ACCESSORY DATA
+boolerizer = ->(){ [true,false].sample}
+doggoIpsum = "He made many woofs yapper clouds very jealous pupper blep shoob, length boy shibe many pats shibe. sub woofer doge noodle horse. Boof borking doggo pupper yapper doggorino such treat, extremely cuuuuuute long woofer boof. Fat boi maximum borkdrive woofer floofs noodle horse long water shoob, yapper heckin aqua doggo. Boof long woofer tungg wow very biscit shooberino, wow very biscit heckin good boys. Boofers pupperino much ruin diet boofers noodle horse pats, borkf boof clouds. Extremely cuuuuuute length boy long water shoob, borking doggo. Blep shooberino heck you are doing me a frighten, shibe long bois.
+"
+doggyData = JSON.parse(RestClient.get 'https://dog.ceo/api/breed/hound/images')
+doggyNames = JSON.parse(RestClient.get 'https://data.muni.org/api/views/a9a7-y93v/rows.json?accessType=DOWNLOAD')["data"].map{|n|n[8]}
+
+
+
 #locations
 denver = Location.create(city:"Denver")
 coSprings = Location.create(city:"Colorado Springs")
 boulder = Location.create(city:"Boulder")
+
+
+
 #users
-binding.pry
-jon = User.create(username:"jon", location:denver)
-jeff = User.create(username:"jeff", location:coSprings)
-jt = User.create(username:"jt", location:boulder)
+jon = User.create(username:"jon", 
+  password:"jon", picture:'https://scontent-mia3-1.xx.fbcdn.net/v/t1.0-9/p960x960/74694859_10220545676739093_712940987470577664_o.jpg?_nc_cat=111&_nc_sid=85a577&_nc_ohc=vOz4n8D3g-MAX8GOTzh&_nc_ht=scontent-mia3-1.xx&_nc_tp=6&oh=71a73c33ee27f66c933a15c2971f5995&oe=5EA115A5', location:denver)
+jeff = User.create(username:"jeff", 
+  password:"jeff",
+  picture: 'https://scontent.ftpa1-2.fna.fbcdn.net/v/t1.0-9/61256484_10219410271071232_4121356651947098112_n.jpg?_nc_cat=104&_nc_sid=85a577&_nc_ohc=rfJsMVpysqcAX9proei&_nc_ht=scontent.ftpa1-2.fna&oh=53c78640b9d55d1a33467935054e67e0&oe=5E9F63D4', location:coSprings)
+jt = User.create(username:"jt",
+      password:"jt",
+      picture: 'https://scontent.ftpa1-1.fna.fbcdn.net/v/t1.0-9/65902239_1735809036551778_8144335823848865792_n.jpg?_nc_cat=105&_nc_sid=85a577&_nc_ohc=uc94253kdyAAX9Qrfcd&_nc_ht=scontent.ftpa1-1.fna&oh=11fc5a1331d8ea7156a97136e2b7b2c9&oe=5EA17188',
+      location:boulder)
+
+# binding.pry
 #animals
+dogs=[]
+numberOfDogs = 30
+count = 0
+while count <= 10
 
-rusty = Animal.create(name:"rusty",location:denver)
-dusty = Animal.create(name:"dusty",location:denver)
-musty = Animal.create(name:"musty",location:coSprings)
+  name = doggyNames.sample
+  dogPicture=doggyData["message"].sample
+    dogIndex = doggyData["message"].index(dogPicture)
+  breed=doggyData["message"][dogIndex].split('/')[4].split('-').reverse.join(" ")
+  Animal.create(name:name,
+      bio:doggoIpsum,
+      species:"dog",
+      breed:breed,
+      gwcats:boolerizer.call,
+      gwkids:boolerizer.call,
+      gwdogs:boolerizer.call,
+      location:Location.all.sample,
+      picture:dogPicture
+    )
+
+count += 1
+end
 
 
-#favorates
-Favorite.create(user:jon, animal:dusty)
-Favorite.create(user:jon, animal:rusty)
-Favorite.create(user:jt, animal:rusty)
-Favorite.create(user:jt, animal:dusty)
+
+#favorites
+Favorite.create(user:jon, animal:Animal.all.sample)
+Favorite.create(user:jon, animal:Animal.all.sample)
+Favorite.create(user:jt, animal:Animal.all.sample)
+Favorite.create(user:jt, animal:Animal.all.sample)
+
+
