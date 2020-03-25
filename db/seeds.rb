@@ -1,4 +1,4 @@
-# # This file is auto-generated from the current state of the database. Instead
+require 'pry' # # This file is auto-generated from the current state of the database. Instead
 # # of editing this file, please use the migrations feature of Active Record to
 # # incrementally modify your database, and then regenerate this schema definition.
 # #
@@ -66,13 +66,16 @@ denver = Location.create(city:"Denver")
 coSprings = Location.create(city:"Colorado Springs")
 boulder = Location.create(city:"Boulder")
 #users
+binding.pry
 jon = User.create(username:"jon", location:denver)
 jeff = User.create(username:"jeff", location:coSprings)
 jt = User.create(username:"jt", location:boulder)
 #animals
+
 rusty = Animal.create(name:"rusty",location:denver)
 dusty = Animal.create(name:"dusty",location:denver)
 musty = Animal.create(name:"musty",location:coSprings)
+
 Favorite.create(user:jon, animal:dusty)
 Favorite.create(user:jon, animal:rusty)
 Favorite.create(user:jt, animal:rusty)
