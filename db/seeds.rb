@@ -1,3 +1,4 @@
+
 require 'pry' # # This file is auto-generated from the current state of the database. Instead
 # # of editing this file, please use the migrations feature of Active Record to
 # # incrementally modify your database, and then regenerate this schema definition.
@@ -56,6 +57,7 @@ require 'pry' # # This file is auto-generated from the current state of the data
 #   add_foreign_key "users", "locations"
 # end
 # # 
+
 Favorite.destroy_all
 User.destroy_all
 Animal.destroy_all
@@ -76,24 +78,9 @@ rusty = Animal.create(name:"rusty",location:denver)
 dusty = Animal.create(name:"dusty",location:denver)
 musty = Animal.create(name:"musty",location:coSprings)
 
+
+#favorates
 Favorite.create(user:jon, animal:dusty)
 Favorite.create(user:jon, animal:rusty)
 Favorite.create(user:jt, animal:rusty)
 Favorite.create(user:jt, animal:dusty)
-
-
-
-#   create_table "users", force: :cascade do |t|
-#     t.string "username"
-#     t.string "birth_name"
-#     t.string "password"
-#     t.integer "location_id", null: false
-#     t.datetime "created_at", precision: 6, null: false
-#     t.datetime "updated_at", precision: 6, null: false
-#     t.index ["location_id"], name: "index_users_on_location_id"
-#   end
-
-#   add_foreign_key "animals", "adopteds"
-#   add_foreign_key "animals", "favorites"
-#   add_foreign_key "users", "locations"
-# end
