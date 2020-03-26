@@ -3,5 +3,8 @@ Rails.application.routes.draw do
   resources :users
   resources :animals
   resources :locations
+
+ 
+get '/userLocation/:username', to: 'users#locatelocation'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

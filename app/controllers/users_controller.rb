@@ -14,5 +14,10 @@ class UsersController < ApplicationController
     User.create(username:params[:username], password:params[:password], location_id:params[:location_id])
     redirect_to 'http://localhost:3001/'  
   end
+  
+  def locatelocation
+      user = User.find_by(username: params[:username])
+      render json: user.location, include: [:animals,:users]
+  end
 
 end
