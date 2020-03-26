@@ -10,4 +10,9 @@ class UsersController < ApplicationController
     render json: user, include: [:animals, :favorites, :location]
   end
 
+  def create
+    User.create(username:params[:username], password:params[:password], location_id:params[:location_id])
+    redirect_to 'http://localhost:3001/'  
+  end
+
 end

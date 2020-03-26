@@ -14,7 +14,7 @@ Location.destroy_all
 
 #ACCESSORY DATA
 boolerizer = ->(){ [true,false].sample}
-doggoIpsum = "He made many woofs yapper clouds very jealous pupper blep shoob, length boy shibe many pats shibe. sub woofer doge noodle horse. Boof borking doggo pupper yapper doggorino such treat, extremely cuuuuuute long woofer boof. Fat boi maximum borkdrive woofer floofs noodle horse long water shoob, yapper heckin aqua doggo. Boof long woofer tungg wow very biscit shooberino, wow very biscit heckin good boys. Boofers pupperino much ruin diet boofers noodle horse pats, borkf boof clouds. Extremely cuuuuuute length boy long water shoob, borking doggo. Blep shooberino heck you are doing me a frighten, shibe long bois.
+doggoIpsum = "He made many woofs yapper clouds very jealous pupper blep shoob, length boy shibe many pats shibe. sub woofer doge noodle horse. Boof borking doggo pupper yapper doggorin bois.
 "
 doggyData = JSON.parse(RestClient.get 'https://dog.ceo/api/breed/hound/images')
 doggyNames = JSON.parse(RestClient.get 'https://data.muni.org/api/views/a9a7-y93v/rows.json?accessType=DOWNLOAD')["data"].map{|n|n[8]}
@@ -42,9 +42,9 @@ jt = User.create(username:"jt",
 # binding.pry
 #animals
 dogs=[]
-numberOfDogs = 30
+numberOfDogs = 65
 count = 0
-while count <= 10
+while count <= numberOfDogs
 
   name = doggyNames.sample
   dogPicture=doggyData["message"].sample
