@@ -8,6 +8,13 @@ class FavoritesController < ApplicationController
     favorite = Favorite.find(params[:id])
     render json: favorite, include: [:user,:animal]
   end
+  
+  def addToFavorites
+      user=User.find_by(username:params[:currentUsername])
+      Favorite.create(user:user,animal_id:params[:puppyID])
+      
+  end
+
 
   
 end

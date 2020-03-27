@@ -9,5 +9,6 @@ get '/userLocation/:username', to: 'users#locatelocation'
 post '/changeUserName/:currentUsername', to: 'users#changeUserName'
 post '/changeUserPassword/:currentUsername', to: 'users#changeUserPassword'
 post '/changeUserLocation/:currentUsername', to: 'users#changeUserLocation'
+post '/addToFavorites/:currentUsername/:puppyID', to: 'favorites#addToFavorites'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
