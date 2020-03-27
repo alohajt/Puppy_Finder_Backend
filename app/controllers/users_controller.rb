@@ -19,5 +19,28 @@ class UsersController < ApplicationController
       user = User.find_by(username: params[:username])
       render json: user.location, include: [:animals,:users]
   end
+  
+  def changeUserName
+    user = User.find_by(username: params[:currentUsername])
+    user.update(username:params[:username])
+    redirect_to 'http://localhost:3001/'
+  end
+  def changeUserPassword
+    user = User.find_by(username: params[:currentUsername])
+    user.update(password:params[:password])
+    redirect_to 'http://localhost:3001/'
+  end
+  def changeUserLocation
+    user = User.find_by(username: params[:currentUsername])
+    user.update(location_id:params[:location_id])
+    redirect_to 'http://localhost:3001/'
+  end
+
+  def favoriteAnimals
+
+    user = User.find_by(username: params[:username])
+    render json: user.favorites, include: [:animal,:user]
+  end
+
 
 end
