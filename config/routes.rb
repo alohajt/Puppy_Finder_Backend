@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
  
 get '/userLocation/:username', to: 'users#locatelocation'
+get '/userFavorites/:username', to: 'users#favoriteAnimals'
 post '/changeUserName/:currentUsername', to: 'users#changeUserName'
 post '/changeUserPassword/:currentUsername', to: 'users#changeUserPassword'
 post '/changeUserLocation/:currentUsername', to: 'users#changeUserLocation'

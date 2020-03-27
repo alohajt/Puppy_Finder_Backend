@@ -36,5 +36,11 @@ class UsersController < ApplicationController
     redirect_to 'http://localhost:3001/'
   end
 
+  def favoriteAnimals
+
+    user = User.find_by(username: params[:username])
+    render json: user.favorites, include: [:animal,:user]
+  end
+
 
 end
